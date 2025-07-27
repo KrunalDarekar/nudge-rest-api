@@ -18,16 +18,16 @@ export class AIService {
     this.openai = new OpenAI({
       apiKey,
     });
-    this.model = process.env.OPENAI_MODEL || 'gpt-4';
+    this.model = process.env.OPENAI_MODEL || 'gpt-4.1-mini-2025-04-14';
   }
 
   async generateNudge(request: NudgeRequest): Promise<NudgeResponse> {
     const prompt = this.buildPrompt(request);
     
     try {
-      const completion = await this.openai.chat.completions.create({
+      const response = await this.openai.responses.create({
         model: this.model,
-        messages: [
+        input: [
           {
             role: 'system',
             content: `You are an expert programming tutor helping students solve LeetCode problems. 
@@ -48,7 +48,7 @@ export class AIService {
         ],
       });
 
-      const nudge = completion.choices[0]?.message?.content?.trim();
+      const nudge = response.output_text;
       
       if (!nudge) {
         throw new Error('Failed to generate nudge from AI service');
