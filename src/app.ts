@@ -19,13 +19,13 @@ app.set('trust proxy', 1);
 app.use(helmet());
 
 // CORS configuration
-// const corsOptions = {
-//   origin: process.env.CORS_ORIGIN || '*',
-//   methods: ['GET', 'POST'],
-//   allowedHeaders: ['Content-Type', 'Authorization'],
-// };
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN || '*',
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 
 // Rate limiting
 const limiter = rateLimit({
