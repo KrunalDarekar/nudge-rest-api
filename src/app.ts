@@ -21,9 +21,8 @@ app.use(helmet());
 // CORS configuration
 const corsOptions = {
   origin: '*',
-  methods: ['GET', 'POST', 'OPTIONS'], // Add OPTIONS
+  methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true, // if you expect cookies / auth headers
 };
 
 app.use(cors(corsOptions));
